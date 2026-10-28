@@ -1,0 +1,154 @@
+---
+title: "Flag Viewer"
+format: html
+resources:
+  - w2560/*.png
+execute:
+  echo: false
+---
+
+```{r}
+#| cache: true
+# List all PNG files and load country names from FlagCDN
+flag_files <- list.files("w2560", pattern = "\\.png$")
+country_names <- jsonlite::read_json("https://flagcdn.com/en/codes.json")
+
+# Sample a 16x10 grid of RGB values from each flag to capture color and layout
+features <- t(sapply(file.path("w2560", flag_files), \(f) {
+  img <- png::readPNG(f)
+  d <- dim(img)
+  rows <- round(seq(1, d[1], length.out = 10))
+  cols <- round(seq(1, d[2], length.out = 16))
+  if (length(d) == 2) {
+    sub <- img[rows, cols]
+    c(sub, sub, sub)
+  } else {
+    c(img[rows, cols, 1], img[rows, cols, 2], img[rows, cols, 3])
+  }
+}))
+
+# Find the closest non-identical flag for each country using Euclidean distance
+dist_mat <- as.matrix(dist(features))
+dist_mat[dist_mat < 0.01] <- Inf
+similar_flags <- setNames(
+  as.list(flag_files[apply(dist_mat, 1, which.min)]),
+  flag_files
+)
+```
+
+```{r}
+# 1. Color similarity: sort each channel's pixels to compare color palette regardless of position
+color_features <- t(apply(features, 1, \(x) {
+  c(sort(x[1:160]), sort(x[161:320]), sort(x[321:480]))
+}))
+color_dist <- as.matrix(dist(color_features))
+color_dist[dist_mat < 0.01] <- Inf
+similar_color <- setNames(as.list(flag_files[apply(color_dist, 1, which.min)]), flag_files)
+
+# 2. Layout similarity: compare row-to-row and col-to-col boundaries regardless of which colors are used
+layout_features <- t(apply(features, 1, \(x) {
+  r <- matrix(x[1:160], 10, 16)
+  g <- matrix(x[161:320], 10, 16)
+  b <- matrix(x[321:480], 10, 16)
+  row_edges <- sqrt(diff(r)^2 + diff(g)^2 + diff(b)^2)
+  col_edges <- sqrt(diff(t(r))^2 + diff(t(g))^2 + diff(t(b))^2)
+  c(as.vector(row_edges), as.vector(col_edges))
+}))
+layout_dist <- as.matrix(dist(layout_features))
+layout_dist[dist_mat < 0.01] <- Inf
+similar_layout <- setNames(as.list(flag_files[apply(layout_dist, 1, which.min)]), flag_files)
+
+# 3. History of design: group flags by historical design families and match within family
+families <- list(
+  nordic = c("dk", "se", "no", "fi", "is", "fo", "ax"),
+  british = c("gb", "au", "nz", "fj", "tv", "vg", "ky", "bm", "fk", "gs", "io", "ms", "pn", "sh", "tc", "ai", "ck", "nu", "us", "lr", "my"),
+  panslavic = c("ru", "rs", "si", "sk", "cz", "hr", "bg", "nl", "lu"),
+  panarab = c("eg", "iq", "sy", "ye", "sd", "jo", "ps", "kw", "ae", "eh", "ly"),
+  panafrican = c("et", "gh", "sn", "ml", "gn", "cm", "cg", "bj", "tg", "bf", "gw", "st", "zm", "zw", "mw", "ke", "ss", "za", "jm", "gd", "kn", "gy"),
+  tricolor = c("fr", "it", "ie", "be", "ro", "td", "md", "ad", "mx", "pe", "ci"),
+  bolivarian_ca = c("co", "ec", "ve", "gt", "hn", "sv", "ni", "cr", "ar", "uy"),
+  crescent = c("tr", "tn", "dz", "mr", "pk", "az", "uz", "tm", "sg", "mv", "km"),
+  iberian_stars = c("es", "pt", "cu", "pr", "ph", "cl", "pa")
+)
+family_descriptions <- list(
+  nordic = "Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.",
+  british = "Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).",
+  panslavic = "These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.",
+  panarab = "Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.",
+  panafrican = "These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.",
+  tricolor = "Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.",
+  bolivarian_ca = "These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.",
+  crescent = "Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.",
+  iberian_stars = "These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile."
+)
+codes <- sub("\\.png$", "", flag_files)
+hist_dist <- dist_mat
+history_notes <- setNames(
+  as.list(rep("These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.", length(flag_files))),
+  flag_files
+)
+for (fam_name in names(families)) {
+  fam <- families[[fam_name]]
+  idx <- which(codes %in% fam)
+  hist_dist[idx, idx] <- hist_dist[idx, idx] * 0.2
+  for (f in flag_files[idx]) {
+    history_notes[[f]] <- family_descriptions[[fam_name]]
+  }
+}
+hist_dist[dist_mat < 0.01] <- Inf
+similar_history <- setNames(as.list(flag_files[apply(hist_dist, 1, which.min)]), flag_files)
+
+ojs_define(
+  flag_files = flag_files,
+  country_names = country_names,
+  similar_color = similar_color,
+  similar_layout = similar_layout,
+  similar_history = similar_history,
+  history_notes = history_notes
+)
+```
+
+```{ojs}
+// 1. User selects a flag and how to match it
+viewof selected_flag = Inputs.select(flag_files, {
+  label: "Select a flag:",
+  value: "us.png"
+})
+
+viewof match_type = Inputs.radio(
+  ["Color", "Layout", "History of Design"],
+  { label: "Match by:", value: "Color" }
+)
+
+selected_country = country_names[selected_flag.replace(".png", "")]
+
+html`
+  <div>
+    <h3>Selected Flag</h3>
+    <img src="w2560/${selected_flag}" style="max-width: 400px; border: 1px solid #ccc;">
+    <p style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;">${selected_country}</p>
+  </div>
+`
+```
+
+```{ojs}
+// 2. Automatically look up and display the most similar flag for the chosen criterion
+lookup = match_type === "Color"
+  ? similar_color
+  : match_type === "Layout"
+  ? similar_layout
+  : similar_history
+
+similar_flag = lookup[selected_flag]
+similar_country = country_names[similar_flag.replace(".png", "")]
+history_text = match_type === "History of Design" ? history_notes[selected_flag] : ""
+
+html`
+  <div>
+    <h3>Most Similar Flag (${match_type})</h3>
+    <img src="w2560/${similar_flag}" style="max-width: 400px; border: 1px solid #ccc;">
+    <p style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;">${similar_country} (${similar_flag})</p>
+    <p style="max-width: 500px; color: #444;">${history_text}</p>
+  </div>
+`
+```
