@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Flag Viewer</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="flags_files/libs/clipboard/clipboard.min.js"></script>
+<script src="flags_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="flags_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="flags_files/libs/quarto-html/popper.min.js"></script>
+<script src="flags_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="flags_files/libs/quarto-html/anchor.min.js"></script>
+<link href="flags_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="flags_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="flags_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="flags_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="flags_files/libs/bootstrap/bootstrap-2d8e8d8c08cd9eb5ffb286a132dd36b7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script type="module" src="flags_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="flags_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="ojs-define">
+{"contents":[{"name":"flag_files","value":["ad.png","ae.png","af.png","ag.png","ai.png","al.png","am.png","ao.png","aq.png","ar.png","as.png","at.png","au.png","aw.png","ax.png","az.png","ba.png","bb.png","bd.png","be.png","bf.png","bg.png","bh.png","bi.png","bj.png","bl.png","bm.png","bn.png","bo.png","bq.png","br.png","bs.png","bt.png","bv.png","bw.png","by.png","bz.png","ca.png","cc.png","cd.png","cf.png","cg.png","ch.png","ci.png","ck.png","cl.png","cm.png","cn.png","co.png","cr.png","cu.png","cv.png","cw.png","cx.png","cy.png","cz.png","de.png","dj.png","dk.png","dm.png","do.png","dz.png","ec.png","ee.png","eg.png","eh.png","er.png","es.png","et.png","fi.png","fj.png","fk.png","fm.png","fo.png","fr.png","ga.png","gb-eng.png","gb-nir.png","gb-sct.png","gb-wls.png","gb.png","gd.png","ge.png","gf.png","gg.png","gh.png","gi.png","gl.png","gm.png","gn.png","gp.png","gq.png","gr.png","gs.png","gt.png","gu.png","gw.png","gy.png","hk.png","hm.png","hn.png","hr.png","ht.png","hu.png","id.png","ie.png","il.png","im.png","in.png","io.png","iq.png","ir.png","is.png","it.png","je.png","jm.png","jo.png","jp.png","ke.png","kg.png","kh.png","ki.png","km.png","kn.png","kp.png","kr.png","kw.png","ky.png","kz.png","la.png","lb.png","lc.png","li.png","lk.png","lr.png","ls.png","lt.png","lu.png","lv.png","ly.png","ma.png","mc.png","md.png","me.png","mf.png","mg.png","mh.png","mk.png","ml.png","mm.png","mn.png","mo.png","mp.png","mq.png","mr.png","ms.png","mt.png","mu.png","mv.png","mw.png","mx.png","my.png","mz.png","na.png","nc.png","ne.png","nf.png","ng.png","ni.png","nl.png","no.png","np.png","nr.png","nu.png","nz.png","om.png","pa.png","pe.png","pf.png","pg.png","ph.png","pk.png","pl.png","pm.png","pn.png","pr.png","ps.png","pt.png","pw.png","py.png","qa.png","re.png","ro.png","rs.png","ru.png","rw.png","sa.png","sb.png","sc.png","sd.png","se.png","sg.png","sh.png","si.png","sj.png","sk.png","sl.png","sm.png","sn.png","so.png","sr.png","ss.png","st.png","sv.png","sx.png","sy.png","sz.png","tc.png","td.png","tf.png","tg.png","th.png","tj.png","tk.png","tl.png","tm.png","tn.png","to.png","tr.png","tt.png","tv.png","tw.png","tz.png","ua.png","ug.png","um.png","us.png","uy.png","uz.png","va.png","vc.png","ve.png","vg.png","vi.png","vn.png","vu.png","wf.png","ws.png","xk.png","ye.png","yt.png","za.png","zm.png","zw.png"]},{"name":"country_names","value":{"ad":"Andorra","ae":"United Arab Emirates","af":"Afghanistan","ag":"Antigua and Barbuda","ai":"Anguilla","al":"Albania","am":"Armenia","ao":"Angola","aq":"Antarctica","ar":"Argentina","as":"American Samoa","at":"Austria","au":"Australia","aw":"Aruba","ax":"Åland Islands","az":"Azerbaijan","ba":"Bosnia and Herzegovina","bb":"Barbados","bd":"Bangladesh","be":"Belgium","bf":"Burkina Faso","bg":"Bulgaria","bh":"Bahrain","bi":"Burundi","bj":"Benin","bl":"Saint Barthélemy","bm":"Bermuda","bn":"Brunei","bo":"Bolivia","bq":"Caribbean Netherlands","br":"Brazil","bs":"Bahamas","bt":"Bhutan","bv":"Bouvet Island","bw":"Botswana","by":"Belarus","bz":"Belize","ca":"Canada","cc":"Cocos (Keeling) Islands","cd":"DR Congo","cf":"Central African Republic","cg":"Republic of the Congo","ch":"Switzerland","ci":"Côte d'Ivoire (Ivory Coast)","ck":"Cook Islands","cl":"Chile","cm":"Cameroon","cn":"China","co":"Colombia","cr":"Costa Rica","cu":"Cuba","cv":"Cape Verde","cw":"Curaçao","cx":"Christmas Island","cy":"Cyprus","cz":"Czechia","de":"Germany","dj":"Djibouti","dk":"Denmark","dm":"Dominica","do":"Dominican Republic","dz":"Algeria","ec":"Ecuador","ee":"Estonia","eg":"Egypt","eh":"Western Sahara","er":"Eritrea","es":"Spain","et":"Ethiopia","eu":"European Union","fi":"Finland","fj":"Fiji","fk":"Falkland Islands","fm":"Micronesia","fo":"Faroe Islands","fr":"France","ga":"Gabon","gb":"United Kingdom","gb-eng":"England","gb-nir":"Northern Ireland","gb-sct":"Scotland","gb-wls":"Wales","gd":"Grenada","ge":"Georgia","gf":"French Guiana","gg":"Guernsey","gh":"Ghana","gi":"Gibraltar","gl":"Greenland","gm":"Gambia","gn":"Guinea","gp":"Guadeloupe","gq":"Equatorial Guinea","gr":"Greece","gs":"South Georgia","gt":"Guatemala","gu":"Guam","gw":"Guinea-Bissau","gy":"Guyana","hk":"Hong Kong","hm":"Heard Island and McDonald Islands","hn":"Honduras","hr":"Croatia","ht":"Haiti","hu":"Hungary","id":"Indonesia","ie":"Ireland","il":"Israel","im":"Isle of Man","in":"India","io":"British Indian Ocean Territory","iq":"Iraq","ir":"Iran","is":"Iceland","it":"Italy","je":"Jersey","jm":"Jamaica","jo":"Jordan","jp":"Japan","ke":"Kenya","kg":"Kyrgyzstan","kh":"Cambodia","ki":"Kiribati","km":"Comoros","kn":"Saint Kitts and Nevis","kp":"North Korea","kr":"South Korea","kw":"Kuwait","ky":"Cayman Islands","kz":"Kazakhstan","la":"Laos","lb":"Lebanon","lc":"Saint Lucia","li":"Liechtenstein","lk":"Sri Lanka","lr":"Liberia","ls":"Lesotho","lt":"Lithuania","lu":"Luxembourg","lv":"Latvia","ly":"Libya","ma":"Morocco","mc":"Monaco","md":"Moldova","me":"Montenegro","mf":"Saint Martin","mg":"Madagascar","mh":"Marshall Islands","mk":"North Macedonia","ml":"Mali","mm":"Myanmar","mn":"Mongolia","mo":"Macau","mp":"Northern Mariana Islands","mq":"Martinique","mr":"Mauritania","ms":"Montserrat","mt":"Malta","mu":"Mauritius","mv":"Maldives","mw":"Malawi","mx":"Mexico","my":"Malaysia","mz":"Mozambique","na":"Namibia","nc":"New Caledonia","ne":"Niger","nf":"Norfolk Island","ng":"Nigeria","ni":"Nicaragua","nl":"Netherlands","no":"Norway","np":"Nepal","nr":"Nauru","nu":"Niue","nz":"New Zealand","om":"Oman","pa":"Panama","pe":"Peru","pf":"French Polynesia","pg":"Papua New Guinea","ph":"Philippines","pk":"Pakistan","pl":"Poland","pm":"Saint Pierre and Miquelon","pn":"Pitcairn Islands","pr":"Puerto Rico","ps":"Palestine","pt":"Portugal","pw":"Palau","py":"Paraguay","qa":"Qatar","re":"Réunion","ro":"Romania","rs":"Serbia","ru":"Russia","rw":"Rwanda","sa":"Saudi Arabia","sb":"Solomon Islands","sc":"Seychelles","sd":"Sudan","se":"Sweden","sg":"Singapore","sh":"Saint Helena, Ascension and Tristan da Cunha","si":"Slovenia","sj":"Svalbard and Jan Mayen","sk":"Slovakia","sl":"Sierra Leone","sm":"San Marino","sn":"Senegal","so":"Somalia","sr":"Suriname","ss":"South Sudan","st":"São Tomé and Príncipe","sv":"El Salvador","sx":"Sint Maarten","sy":"Syria","sz":"Eswatini (Swaziland)","tc":"Turks and Caicos Islands","td":"Chad","tf":"French Southern and Antarctic Lands","tg":"Togo","th":"Thailand","tj":"Tajikistan","tk":"Tokelau","tl":"Timor-Leste","tm":"Turkmenistan","tn":"Tunisia","to":"Tonga","tr":"Turkey","tt":"Trinidad and Tobago","tv":"Tuvalu","tw":"Taiwan","tz":"Tanzania","ua":"Ukraine","ug":"Uganda","um":"United States Minor Outlying Islands","un":"United Nations","us":"United States","us-ak":"Alaska","us-al":"Alabama","us-ar":"Arkansas","us-az":"Arizona","us-ca":"California","us-co":"Colorado","us-ct":"Connecticut","us-de":"Delaware","us-fl":"Florida","us-ga":"Georgia","us-hi":"Hawaii","us-ia":"Iowa","us-id":"Idaho","us-il":"Illinois","us-in":"Indiana","us-ks":"Kansas","us-ky":"Kentucky","us-la":"Louisiana","us-ma":"Massachusetts","us-md":"Maryland","us-me":"Maine","us-mi":"Michigan","us-mn":"Minnesota","us-mo":"Missouri","us-ms":"Mississippi","us-mt":"Montana","us-nc":"North Carolina","us-nd":"North Dakota","us-ne":"Nebraska","us-nh":"New Hampshire","us-nj":"New Jersey","us-nm":"New Mexico","us-nv":"Nevada","us-ny":"New York","us-oh":"Ohio","us-ok":"Oklahoma","us-or":"Oregon","us-pa":"Pennsylvania","us-ri":"Rhode Island","us-sc":"South Carolina","us-sd":"South Dakota","us-tn":"Tennessee","us-tx":"Texas","us-ut":"Utah","us-va":"Virginia","us-vt":"Vermont","us-wa":"Washington","us-wi":"Wisconsin","us-wv":"West Virginia","us-wy":"Wyoming","uy":"Uruguay","uz":"Uzbekistan","va":"Vatican City (Holy See)","vc":"Saint Vincent and the Grenadines","ve":"Venezuela","vg":"British Virgin Islands","vi":"United States Virgin Islands","vn":"Vietnam","vu":"Vanuatu","wf":"Wallis and Futuna","ws":"Samoa","xk":"Kosovo","ye":"Yemen","yt":"Mayotte","za":"South Africa","zm":"Zambia","zw":"Zimbabwe"}},{"name":"similar_color","value":{"ad.png":"ad.png","ae.png":"ae.png","af.png":"af.png","ag.png":"ag.png","ai.png":"ai.png","al.png":"al.png","am.png":"am.png","ao.png":"ao.png","aq.png":"aq.png","ar.png":"ar.png","as.png":"as.png","at.png":"at.png","au.png":"au.png","aw.png":"aw.png","ax.png":"ax.png","az.png":"az.png","ba.png":"ba.png","bb.png":"bb.png","bd.png":"bd.png","be.png":"be.png","bf.png":"bf.png","bg.png":"bg.png","bh.png":"bh.png","bi.png":"bi.png","bj.png":"bj.png","bl.png":"bl.png","bm.png":"bm.png","bn.png":"bn.png","bo.png":"bo.png","bq.png":"bq.png","br.png":"br.png","bs.png":"bs.png","bt.png":"bt.png","bv.png":"bv.png","bw.png":"bw.png","by.png":"by.png","bz.png":"bz.png","ca.png":"ca.png","cc.png":"cc.png","cd.png":"cd.png","cf.png":"cf.png","cg.png":"cg.png","ch.png":"ch.png","ci.png":"ci.png","ck.png":"ck.png","cl.png":"cl.png","cm.png":"cm.png","cn.png":"cn.png","co.png":"co.png","cr.png":"cr.png","cu.png":"cu.png","cv.png":"cv.png","cw.png":"cw.png","cx.png":"cx.png","cy.png":"cy.png","cz.png":"cz.png","de.png":"de.png","dj.png":"dj.png","dk.png":"dk.png","dm.png":"dm.png","do.png":"do.png","dz.png":"dz.png","ec.png":"ec.png","ee.png":"ee.png","eg.png":"eg.png","eh.png":"eh.png","er.png":"er.png","es.png":"es.png","et.png":"et.png","fi.png":"fi.png","fj.png":"fj.png","fk.png":"fk.png","fm.png":"fm.png","fo.png":"fo.png","fr.png":"fr.png","ga.png":"ga.png","gb-eng.png":"gb-eng.png","gb-nir.png":"gb-nir.png","gb-sct.png":"gb-sct.png","gb-wls.png":"gb-wls.png","gb.png":"gb.png","gd.png":"gd.png","ge.png":"ge.png","gf.png":"gf.png","gg.png":"gg.png","gh.png":"gh.png","gi.png":"gi.png","gl.png":"gl.png","gm.png":"gm.png","gn.png":"gn.png","gp.png":"gp.png","gq.png":"gq.png","gr.png":"gr.png","gs.png":"gs.png","gt.png":"gt.png","gu.png":"gu.png","gw.png":"gw.png","gy.png":"gy.png","hk.png":"hk.png","hm.png":"hm.png","hn.png":"hn.png","hr.png":"hr.png","ht.png":"ht.png","hu.png":"hu.png","id.png":"id.png","ie.png":"ie.png","il.png":"il.png","im.png":"im.png","in.png":"in.png","io.png":"io.png","iq.png":"iq.png","ir.png":"ir.png","is.png":"is.png","it.png":"it.png","je.png":"je.png","jm.png":"jm.png","jo.png":"jo.png","jp.png":"jp.png","ke.png":"ke.png","kg.png":"kg.png","kh.png":"kh.png","ki.png":"ki.png","km.png":"km.png","kn.png":"kn.png","kp.png":"kp.png","kr.png":"kr.png","kw.png":"kw.png","ky.png":"ky.png","kz.png":"kz.png","la.png":"la.png","lb.png":"lb.png","lc.png":"lc.png","li.png":"li.png","lk.png":"lk.png","lr.png":"lr.png","ls.png":"ls.png","lt.png":"lt.png","lu.png":"lu.png","lv.png":"lv.png","ly.png":"ly.png","ma.png":"ma.png","mc.png":"mc.png","md.png":"md.png","me.png":"me.png","mf.png":"fr.png","mg.png":"mg.png","mh.png":"mh.png","mk.png":"mk.png","ml.png":"ml.png","mm.png":"mm.png","mn.png":"mn.png","mo.png":"mo.png","mp.png":"mp.png","mq.png":"mq.png","mr.png":"mr.png","ms.png":"ms.png","mt.png":"mt.png","mu.png":"mu.png","mv.png":"mv.png","mw.png":"mw.png","mx.png":"mx.png","my.png":"my.png","mz.png":"mz.png","na.png":"na.png","nc.png":"nc.png","ne.png":"ne.png","nf.png":"nf.png","ng.png":"ng.png","ni.png":"ni.png","nl.png":"nl.png","no.png":"bv.png","np.png":"np.png","nr.png":"nr.png","nu.png":"nu.png","nz.png":"nz.png","om.png":"om.png","pa.png":"pa.png","pe.png":"pe.png","pf.png":"pf.png","pg.png":"pg.png","ph.png":"ph.png","pk.png":"pk.png","pl.png":"pl.png","pm.png":"pm.png","pn.png":"pn.png","pr.png":"pr.png","ps.png":"ps.png","pt.png":"pt.png","pw.png":"pw.png","py.png":"py.png","qa.png":"qa.png","re.png":"re.png","ro.png":"ro.png","rs.png":"rs.png","ru.png":"ru.png","rw.png":"rw.png","sa.png":"sa.png","sb.png":"sb.png","sc.png":"sc.png","sd.png":"sd.png","se.png":"se.png","sg.png":"sg.png","sh.png":"sh.png","si.png":"si.png","sj.png":"bv.png","sk.png":"sk.png","sl.png":"sl.png","sm.png":"sm.png","sn.png":"sn.png","so.png":"so.png","sr.png":"sr.png","ss.png":"ss.png","st.png":"st.png","sv.png":"sv.png","sx.png":"sx.png","sy.png":"sy.png","sz.png":"sz.png","tc.png":"tc.png","td.png":"td.png","tf.png":"tf.png","tg.png":"tg.png","th.png":"th.png","tj.png":"tj.png","tk.png":"tk.png","tl.png":"tl.png","tm.png":"tm.png","tn.png":"tn.png","to.png":"to.png","tr.png":"tr.png","tt.png":"tt.png","tv.png":"tv.png","tw.png":"tw.png","tz.png":"tz.png","ua.png":"ua.png","ug.png":"ug.png","um.png":"um.png","us.png":"um.png","uy.png":"uy.png","uz.png":"uz.png","va.png":"va.png","vc.png":"vc.png","ve.png":"ve.png","vg.png":"vg.png","vi.png":"vi.png","vn.png":"vn.png","vu.png":"vu.png","wf.png":"wf.png","ws.png":"ws.png","xk.png":"xk.png","ye.png":"ye.png","yt.png":"yt.png","za.png":"za.png","zm.png":"zm.png","zw.png":"zw.png"}},{"name":"similar_layout","value":{"ad.png":"ad.png","ae.png":"ae.png","af.png":"af.png","ag.png":"ag.png","ai.png":"ai.png","al.png":"al.png","am.png":"am.png","ao.png":"ao.png","aq.png":"aq.png","ar.png":"ar.png","as.png":"as.png","at.png":"at.png","au.png":"au.png","aw.png":"aw.png","ax.png":"ax.png","az.png":"az.png","ba.png":"ba.png","bb.png":"bb.png","bd.png":"bd.png","be.png":"be.png","bf.png":"bf.png","bg.png":"bg.png","bh.png":"bh.png","bi.png":"bi.png","bj.png":"bj.png","bl.png":"bl.png","bm.png":"bm.png","bn.png":"bn.png","bo.png":"bo.png","bq.png":"bq.png","br.png":"br.png","bs.png":"bs.png","bt.png":"bt.png","bv.png":"bv.png","bw.png":"bw.png","by.png":"by.png","bz.png":"bz.png","ca.png":"ca.png","cc.png":"cc.png","cd.png":"cd.png","cf.png":"cf.png","cg.png":"cg.png","ch.png":"ch.png","ci.png":"ci.png","ck.png":"ck.png","cl.png":"cl.png","cm.png":"cm.png","cn.png":"cn.png","co.png":"co.png","cr.png":"cr.png","cu.png":"cu.png","cv.png":"cv.png","cw.png":"cw.png","cx.png":"cx.png","cy.png":"cy.png","cz.png":"cz.png","de.png":"de.png","dj.png":"dj.png","dk.png":"dk.png","dm.png":"dm.png","do.png":"do.png","dz.png":"dz.png","ec.png":"ec.png","ee.png":"ee.png","eg.png":"eg.png","eh.png":"eh.png","er.png":"er.png","es.png":"es.png","et.png":"et.png","fi.png":"fi.png","fj.png":"fj.png","fk.png":"fk.png","fm.png":"fm.png","fo.png":"fo.png","fr.png":"fr.png","ga.png":"ga.png","gb-eng.png":"gb-eng.png","gb-nir.png":"gb-nir.png","gb-sct.png":"gb-sct.png","gb-wls.png":"gb-wls.png","gb.png":"gb.png","gd.png":"gd.png","ge.png":"ge.png","gf.png":"gf.png","gg.png":"gg.png","gh.png":"gh.png","gi.png":"gi.png","gl.png":"gl.png","gm.png":"gm.png","gn.png":"gn.png","gp.png":"gp.png","gq.png":"gq.png","gr.png":"gr.png","gs.png":"gs.png","gt.png":"gt.png","gu.png":"gu.png","gw.png":"gw.png","gy.png":"gy.png","hk.png":"hk.png","hm.png":"hm.png","hn.png":"hn.png","hr.png":"hr.png","ht.png":"ht.png","hu.png":"hu.png","id.png":"id.png","ie.png":"ie.png","il.png":"il.png","im.png":"im.png","in.png":"in.png","io.png":"io.png","iq.png":"iq.png","ir.png":"ir.png","is.png":"is.png","it.png":"it.png","je.png":"je.png","jm.png":"jm.png","jo.png":"jo.png","jp.png":"jp.png","ke.png":"ke.png","kg.png":"kg.png","kh.png":"kh.png","ki.png":"ki.png","km.png":"km.png","kn.png":"kn.png","kp.png":"kp.png","kr.png":"kr.png","kw.png":"kw.png","ky.png":"ky.png","kz.png":"kz.png","la.png":"la.png","lb.png":"lb.png","lc.png":"lc.png","li.png":"li.png","lk.png":"lk.png","lr.png":"lr.png","ls.png":"ls.png","lt.png":"lt.png","lu.png":"lu.png","lv.png":"lv.png","ly.png":"ly.png","ma.png":"ma.png","mc.png":"mc.png","md.png":"md.png","me.png":"me.png","mf.png":"fr.png","mg.png":"mg.png","mh.png":"mh.png","mk.png":"mk.png","ml.png":"ml.png","mm.png":"mm.png","mn.png":"mn.png","mo.png":"mo.png","mp.png":"mp.png","mq.png":"mq.png","mr.png":"mr.png","ms.png":"ms.png","mt.png":"mt.png","mu.png":"mu.png","mv.png":"mv.png","mw.png":"mw.png","mx.png":"mx.png","my.png":"my.png","mz.png":"mz.png","na.png":"na.png","nc.png":"nc.png","ne.png":"ne.png","nf.png":"nf.png","ng.png":"ng.png","ni.png":"ni.png","nl.png":"nl.png","no.png":"bv.png","np.png":"np.png","nr.png":"nr.png","nu.png":"nu.png","nz.png":"nz.png","om.png":"om.png","pa.png":"pa.png","pe.png":"pe.png","pf.png":"pf.png","pg.png":"pg.png","ph.png":"ph.png","pk.png":"pk.png","pl.png":"pl.png","pm.png":"pm.png","pn.png":"pn.png","pr.png":"pr.png","ps.png":"ps.png","pt.png":"pt.png","pw.png":"pw.png","py.png":"py.png","qa.png":"qa.png","re.png":"re.png","ro.png":"ro.png","rs.png":"rs.png","ru.png":"ru.png","rw.png":"rw.png","sa.png":"sa.png","sb.png":"sb.png","sc.png":"sc.png","sd.png":"sd.png","se.png":"se.png","sg.png":"sg.png","sh.png":"sh.png","si.png":"si.png","sj.png":"bv.png","sk.png":"sk.png","sl.png":"sl.png","sm.png":"sm.png","sn.png":"sn.png","so.png":"so.png","sr.png":"sr.png","ss.png":"ss.png","st.png":"st.png","sv.png":"sv.png","sx.png":"sx.png","sy.png":"sy.png","sz.png":"sz.png","tc.png":"tc.png","td.png":"td.png","tf.png":"tf.png","tg.png":"tg.png","th.png":"th.png","tj.png":"tj.png","tk.png":"tk.png","tl.png":"tl.png","tm.png":"tm.png","tn.png":"tn.png","to.png":"to.png","tr.png":"tr.png","tt.png":"tt.png","tv.png":"tv.png","tw.png":"tw.png","tz.png":"tz.png","ua.png":"ua.png","ug.png":"ug.png","um.png":"um.png","us.png":"um.png","uy.png":"uy.png","uz.png":"uz.png","va.png":"va.png","vc.png":"vc.png","ve.png":"ve.png","vg.png":"vg.png","vi.png":"vi.png","vn.png":"vn.png","vu.png":"vu.png","wf.png":"wf.png","ws.png":"ws.png","xk.png":"xk.png","ye.png":"ye.png","yt.png":"yt.png","za.png":"za.png","zm.png":"zm.png","zw.png":"zw.png"}},{"name":"similar_history","value":{"ad.png":"ro.png","ae.png":"eh.png","af.png":"bd.png","ag.png":"ma.png","ai.png":"tc.png","al.png":"vn.png","am.png":"bv.png","ao.png":"pg.png","aq.png":"so.png","ar.png":"ni.png","as.png":"kw.png","at.png":"pf.png","au.png":"nz.png","aw.png":"so.png","ax.png":"is.png","az.png":"uz.png","ba.png":"bb.png","bb.png":"td.png","bd.png":"mo.png","be.png":"td.png","bf.png":"gw.png","bg.png":"ru.png","bh.png":"qa.png","bi.png":"mm.png","bj.png":"cm.png","bl.png":"cy.png","bm.png":"ai.png","bn.png":"bt.png","bo.png":"gh.png","bq.png":"dj.png","br.png":"bd.png","bs.png":"mo.png","bt.png":"mm.png","bv.png":"ma.png","bw.png":"aw.png","by.png":"bf.png","bz.png":"gu.png","ca.png":"pe.png","cc.png":"sa.png","cd.png":"aw.png","cf.png":"ua.png","cg.png":"ml.png","ch.png":"hk.png","ci.png":"pe.png","ck.png":"nz.png","cl.png":"es.png","cm.png":"bj.png","cn.png":"ma.png","co.png":"ec.png","cr.png":"sv.png","cu.png":"pr.png","cv.png":"xk.png","cw.png":"nr.png","cx.png":"sa.png","cy.png":"jp.png","cz.png":"bg.png","de.png":"mw.png","dj.png":"fm.png","dk.png":"no.png","dm.png":"br.png","do.png":"lv.png","dz.png":"az.png","ec.png":"co.png","ee.png":"bw.png","eg.png":"ye.png","eh.png":"ps.png","er.png":"gy.png","es.png":"pt.png","et.png":"kn.png","fi.png":"fo.png","fj.png":"tv.png","fk.png":"ms.png","fm.png":"aw.png","fo.png":"fi.png","fr.png":"it.png","ga.png":"st.png","gb-eng.png":"gg.png","gb-nir.png":"gb-eng.png","gb-sct.png":"so.png","gb-wls.png":"sm.png","gb.png":"bm.png","gd.png":"gn.png","ge.png":"gb-eng.png","gf.png":"gn.png","gg.png":"gb-eng.png","gh.png":"bf.png","gi.png":"gl.png","gl.png":"pl.png","gm.png":"iq.png","gn.png":"gy.png","gp.png":"tk.png","gq.png":"ir.png","gr.png":"ar.png","gs.png":"nz.png","gt.png":"ar.png","gu.png":"bz.png","gw.png":"bf.png","gy.png":"st.png","hk.png":"tn.png","hm.png":"au.png","hn.png":"ni.png","hr.png":"nl.png","ht.png":"li.png","hu.png":"lv.png","id.png":"mc.png","ie.png":"it.png","il.png":"ar.png","im.png":"ma.png","in.png":"tj.png","io.png":"fj.png","iq.png":"ye.png","ir.png":"gq.png","is.png":"se.png","it.png":"ie.png","je.png":"cy.png","jm.png":"zm.png","jo.png":"ps.png","jp.png":"cy.png","ke.png":"mw.png","kg.png":"vn.png","kh.png":"kp.png","ki.png":"hu.png","km.png":"mr.png","kn.png":"zm.png","kp.png":"kh.png","kr.png":"bl.png","kw.png":"ae.png","ky.png":"nz.png","kz.png":"so.png","la.png":"mv.png","lb.png":"pf.png","lc.png":"fm.png","li.png":"ht.png","lk.png":"me.png","lr.png":"us.png","ls.png":"sv.png","lt.png":"ve.png","lu.png":"nl.png","lv.png":"hu.png","ly.png":"sd.png","ma.png":"im.png","mc.png":"id.png","md.png":"ro.png","me.png":"ma.png","mf.png":"it.png","mg.png":"qa.png","mh.png":"xk.png","mk.png":"ma.png","ml.png":"sn.png","mm.png":"lt.png","mn.png":"ma.png","mo.png":"sa.png","mp.png":"xk.png","mq.png":"sa.png","mr.png":"tm.png","ms.png":"sh.png","mt.png":"bh.png","mu.png":"bo.png","mv.png":"tn.png","mw.png":"st.png","mx.png":"it.png","my.png":"lr.png","mz.png":"gf.png","na.png":"mo.png","nc.png":"az.png","ne.png":"in.png","nf.png":"ng.png","ng.png":"nf.png","ni.png":"sv.png","nl.png":"lu.png","no.png":"dk.png","np.png":"bd.png","nr.png":"sa.png","nu.png":"bm.png","nz.png":"ky.png","om.png":"gw.png","pa.png":"es.png","pe.png":"fr.png","pf.png":"lb.png","pg.png":"ao.png","ph.png":"es.png","pk.png":"tm.png","pl.png":"cl.png","pm.png":"aw.png","pn.png":"tc.png","pr.png":"cu.png","ps.png":"eh.png","pt.png":"es.png","pw.png":"so.png","py.png":"nl.png","qa.png":"bh.png","re.png":"aw.png","ro.png":"td.png","rs.png":"lu.png","ru.png":"bg.png","rw.png":"az.png","sa.png":"mo.png","sb.png":"mo.png","sc.png":"bo.png","sd.png":"ae.png","se.png":"is.png","sg.png":"tr.png","sh.png":"nz.png","si.png":"ru.png","sj.png":"ma.png","sk.png":"ru.png","sl.png":"ni.png","sm.png":"fm.png","sn.png":"ml.png","so.png":"aw.png","sr.png":"cr.png","ss.png":"ke.png","st.png":"gh.png","sv.png":"ni.png","sx.png":"mg.png","sy.png":"ye.png","sz.png":"kp.png","tc.png":"ai.png","td.png":"ro.png","tf.png":"aw.png","tg.png":"zw.png","th.png":"sr.png","tj.png":"ye.png","tk.png":"gp.png","tl.png":"ma.png","tm.png":"mr.png","tn.png":"tr.png","to.png":"cn.png","tr.png":"tn.png","tt.png":"ma.png","tv.png":"fj.png","tw.png":"ws.png","tz.png":"sa.png","ua.png":"rw.png","ug.png":"ma.png","um.png":"lv.png","us.png":"lr.png","uy.png":"gt.png","uz.png":"az.png","va.png":"fo.png","vc.png":"bb.png","ve.png":"co.png","vg.png":"sh.png","vi.png":"cy.png","vn.png":"kg.png","vu.png":"ly.png","wf.png":"ma.png","ws.png":"tw.png","xk.png":"mp.png","ye.png":"eg.png","yt.png":"jp.png","za.png":"bf.png","zm.png":"kn.png","zw.png":"tg.png"}},{"name":"history_notes","value":{"ad.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","ae.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","af.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ag.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ai.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","al.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","am.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ao.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","aq.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ar.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","as.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","at.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","au.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","aw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ax.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","az.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","ba.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bb.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bd.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","be.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","bf.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","bg.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","bh.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bi.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bj.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","bl.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bm.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","bn.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bo.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bq.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","br.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bs.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bt.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bv.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","by.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","bz.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ca.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cd.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cg.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","ch.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ci.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","ck.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","cl.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","cm.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","cn.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","co.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","cr.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","cu.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","cv.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cx.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cy.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","cz.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","de.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","dj.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","dk.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","dm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","do.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","dz.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","ec.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","ee.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","eg.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","eh.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","er.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","es.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","et.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","fi.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","fj.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","fk.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","fm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","fo.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","fr.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","ga.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gb-eng.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gb-nir.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gb-sct.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gb-wls.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gb.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","gd.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","ge.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gg.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gh.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","gi.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gl.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gn.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","gp.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gq.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gr.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gs.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","gt.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","gu.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","gw.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","gy.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","hk.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","hm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","hn.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","hr.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","ht.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","hu.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","id.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ie.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","il.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","im.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","in.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","io.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","iq.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","ir.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","is.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","it.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","je.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","jm.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","jo.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","jp.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ke.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","kg.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","kh.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ki.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","km.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","kn.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","kp.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","kr.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","kw.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","ky.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","kz.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","la.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lb.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","li.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lk.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lr.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","ls.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lt.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","lu.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","lv.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ly.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","ma.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","md.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","me.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mg.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mh.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mk.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ml.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","mm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mn.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mo.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mp.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mq.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mr.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","ms.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","mt.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mu.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","mv.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","mw.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","mx.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","my.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","mz.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","na.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","nc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ne.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","nf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ng.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ni.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","nl.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","no.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","np.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","nr.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","nu.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","nz.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","om.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","pa.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","pe.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","pf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","pg.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ph.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","pk.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","pl.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","pm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","pn.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","pr.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","ps.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","pt.png":"These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile.","pw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","py.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","qa.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","re.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ro.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","rs.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","ru.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","rw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sa.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sb.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sd.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","se.png":"Both flags belong to the Nordic Cross tradition, which originated with Denmark's 13th-century Dannebrog. Neighboring Scandinavian and Nordic nations adopted the off-center cross to reflect shared heritage.","sg.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","sh.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","si.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","sj.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sk.png":"These flags draw from the 17th-century Dutch-inspired Russian tricolor and the 1848 Pan-Slavic Congress in Prague, which adopted red, white, and blue as colors of solidarity.","sl.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sm.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sn.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","so.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sr.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ss.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","st.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","sv.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","sx.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","sy.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","sz.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tc.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","td.png":"Both flags follow the vertical tricolor model popularized by the 1794 French Revolutionary flag, where three equal vertical bands symbolized republican liberty and nationhood.","tf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tg.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","th.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tj.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tk.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tl.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tm.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","tn.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","to.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tr.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","tt.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tv.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","tw.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","tz.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ua.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ug.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","um.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","us.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","uy.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","uz.png":"Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.","va.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","vc.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ve.png":"These flags trace back to Early 19th-century South and Central American independence movements—either Francisco de Miranda's Gran Colombia tricolor or the blue-white-blue stripes of the United Provinces.","vg.png":"Both flags trace their design to British maritime ensigns and colonial cantons (or the East India Company stripes that inspired the U.S., Liberian, and Malaysian flags).","vi.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","vn.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","vu.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","wf.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ws.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","xk.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","ye.png":"Both flags share the Pan-Arab colors (red, white, black, and green) deriving from the 1916 Arab Revolt flag and the 1952 Arab Liberation tricolor.","yt.png":"These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.","za.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","zm.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements.","zw.png":"These flags use the Pan-African colors inspired by Ethiopia's historic tricolor—the oldest independent African nation—adopted across Africa and the Caribbean during independence movements."}}]}
+</script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Flag Viewer</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="111" data-source-offset="-46"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 110;"><span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>viewof selected_flag <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(flag_files<span class="op">,</span> {</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Select a flag:"</span><span class="op">,</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"us.png"</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>viewof match_type <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  [<span class="st">"Color"</span><span class="op">,</span> <span class="st">"Layout"</span><span class="op">,</span> <span class="st">"History of Design"</span>]<span class="op">,</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">label</span><span class="op">:</span> <span class="st">"Match by:"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">"Color"</span> }</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>selected_country <span class="op">=</span> country_names[selected_flag<span class="op">.</span><span class="fu">replace</span>(<span class="st">".png"</span><span class="op">,</span> <span class="st">""</span>)]</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div&gt;</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h3&gt;Selected Flag&lt;/h3&gt;</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;img src="w2560/</span><span class="sc">${</span>selected_flag<span class="sc">}</span><span class="vs">" style="max-width: 400px; border: 1px solid #ccc;"&gt;</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;p style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;"&gt;</span><span class="sc">${</span>selected_country<span class="sc">}</span><span class="vs">&lt;/p&gt;</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="134" data-source-offset="-87"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 133;"><span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>lookup <span class="op">=</span> match_type <span class="op">===</span> <span class="st">"Color"</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> similar_color</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> match_type <span class="op">===</span> <span class="st">"Layout"</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> similar_layout</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> similar_history</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>similar_flag <span class="op">=</span> lookup[selected_flag]</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>similar_country <span class="op">=</span> country_names[similar_flag<span class="op">.</span><span class="fu">replace</span>(<span class="st">".png"</span><span class="op">,</span> <span class="st">""</span>)]</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>history_text <span class="op">=</span> match_type <span class="op">===</span> <span class="st">"History of Design"</span> <span class="op">?</span> history_notes[selected_flag] <span class="op">:</span> <span class="st">""</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div&gt;</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h3&gt;Most Similar Flag (</span><span class="sc">${</span>match_type<span class="sc">}</span><span class="vs">)&lt;/h3&gt;</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;img src="w2560/</span><span class="sc">${</span>similar_flag<span class="sc">}</span><span class="vs">" style="max-width: 400px; border: 1px solid #ccc;"&gt;</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;p style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;"&gt;</span><span class="sc">${</span>similar_country<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>similar_flag<span class="sc">}</span><span class="vs">)&lt;/p&gt;</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;p style="max-width: 500px; color: #444;"&gt;</span><span class="sc">${</span>history_text<span class="sc">}</span><span class="vs">&lt;/p&gt;</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIDEuIFVzZXIgc2VsZWN0cyBhIGZsYWcgYW5kIGhvdyB0byBtYXRjaCBpdFxudmlld29mIHNlbGVjdGVkX2ZsYWcgPSBJbnB1dHMuc2VsZWN0KGZsYWdfZmlsZXMsIHtcbiAgbGFiZWw6IFwiU2VsZWN0IGEgZmxhZzpcIixcbiAgdmFsdWU6IFwidXMucG5nXCJcbn0pXG5cbnZpZXdvZiBtYXRjaF90eXBlID0gSW5wdXRzLnJhZGlvKFxuICBbXCJDb2xvclwiLCBcIkxheW91dFwiLCBcIkhpc3Rvcnkgb2YgRGVzaWduXCJdLFxuICB7IGxhYmVsOiBcIk1hdGNoIGJ5OlwiLCB2YWx1ZTogXCJDb2xvclwiIH1cbilcblxuc2VsZWN0ZWRfY291bnRyeSA9IGNvdW50cnlfbmFtZXNbc2VsZWN0ZWRfZmxhZy5yZXBsYWNlKFwiLnBuZ1wiLCBcIlwiKV1cblxuaHRtbGBcbiAgPGRpdj5cbiAgICA8aDM+U2VsZWN0ZWQgRmxhZzwvaDM+XG4gICAgPGltZyBzcmM9XCJ3MjU2MC8ke3NlbGVjdGVkX2ZsYWd9XCIgc3R5bGU9XCJtYXgtd2lkdGg6IDQwMHB4OyBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1wiPlxuICAgIDxwIHN0eWxlPVwiZm9udC1zaXplOiAxLjI1cmVtOyBmb250LXdlaWdodDogYm9sZDsgbWFyZ2luLXRvcDogMC41cmVtO1wiPiR7c2VsZWN0ZWRfY291bnRyeX08L3A+XG4gIDwvZGl2PlxuYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gMi4gQXV0b21hdGljYWxseSBsb29rIHVwIGFuZCBkaXNwbGF5IHRoZSBtb3N0IHNpbWlsYXIgZmxhZyBmb3IgdGhlIGNob3NlbiBjcml0ZXJpb25cbmxvb2t1cCA9IG1hdGNoX3R5cGUgPT09IFwiQ29sb3JcIlxuICA/IHNpbWlsYXJfY29sb3JcbiAgOiBtYXRjaF90eXBlID09PSBcIkxheW91dFwiXG4gID8gc2ltaWxhcl9sYXlvdXRcbiAgOiBzaW1pbGFyX2hpc3Rvcnlcblxuc2ltaWxhcl9mbGFnID0gbG9va3VwW3NlbGVjdGVkX2ZsYWddXG5zaW1pbGFyX2NvdW50cnkgPSBjb3VudHJ5X25hbWVzW3NpbWlsYXJfZmxhZy5yZXBsYWNlKFwiLnBuZ1wiLCBcIlwiKV1cbmhpc3RvcnlfdGV4dCA9IG1hdGNoX3R5cGUgPT09IFwiSGlzdG9yeSBvZiBEZXNpZ25cIiA/IGhpc3Rvcnlfbm90ZXNbc2VsZWN0ZWRfZmxhZ10gOiBcIlwiXG5cbmh0bWxgXG4gIDxkaXY+XG4gICAgPGgzPk1vc3QgU2ltaWxhciBGbGFnICgke21hdGNoX3R5cGV9KTwvaDM+XG4gICAgPGltZyBzcmM9XCJ3MjU2MC8ke3NpbWlsYXJfZmxhZ31cIiBzdHlsZT1cIm1heC13aWR0aDogNDAwcHg7IGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XCI+XG4gICAgPHAgc3R5bGU9XCJmb250LXNpemU6IDEuMjVyZW07IGZvbnQtd2VpZ2h0OiBib2xkOyBtYXJnaW4tdG9wOiAwLjVyZW07XCI+JHtzaW1pbGFyX2NvdW50cnl9ICgke3NpbWlsYXJfZmxhZ30pPC9wPlxuICAgIDxwIHN0eWxlPVwibWF4LXdpZHRoOiA1MDBweDsgY29sb3I6ICM0NDQ7XCI+JHtoaXN0b3J5X3RleHR9PC9wPlxuICA8L2Rpdj5cbmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2VsZWN0ZWRfZmxhZycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtYXRjaF90eXBlJykifV19
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../..";
+window._ojs.paths.runtimeToRoot = "../../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
