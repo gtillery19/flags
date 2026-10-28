@@ -37,28 +37,14 @@ similar_flags <- setNames(
 ```
 
 ```{r}
-# 1. Color similarity: sort each channel's pixels to compare color palette regardless of position
-color_features <- t(apply(features, 1, \(x) {
-  c(sort(x[1:160]), sort(x[161:320]), sort(x[321:480]))
-}))
-color_dist <- as.matrix(dist(color_features))
-color_dist[dist_mat < 0.01] <- Inf
-similar_color <- setNames(as.list(flag_files[apply(color_dist, 1, which.min)]), flag_files)
+# Exclude self-matches and territories that fly a parent country's identical flag
+codes <- sub("\\.png$", "", flag_files)
+duplicate_territories <- c("um", "hm", "bv", "sj", "bq", "gf", "gp", "mf", "pm", "re", "wf", "yt", "bl", "gb-nir", "sh")
+same_flag_mask <- is.infinite(dist_mat)
+same_flag_mask[, codes %in% duplicate_territories] <- TRUE
+diag(same_flag_mask) <- TRUE
 
-# 2. Layout similarity: compare row-to-row and col-to-col boundaries regardless of which colors are used
-layout_features <- t(apply(features, 1, \(x) {
-  r <- matrix(x[1:160], 10, 16)
-  g <- matrix(x[161:320], 10, 16)
-  b <- matrix(x[321:480], 10, 16)
-  row_edges <- sqrt(diff(r)^2 + diff(g)^2 + diff(b)^2)
-  col_edges <- sqrt(diff(t(r))^2 + diff(t(g))^2 + diff(t(b))^2)
-  c(as.vector(row_edges), as.vector(col_edges))
-}))
-layout_dist <- as.matrix(dist(layout_features))
-layout_dist[dist_mat < 0.01] <- Inf
-similar_layout <- setNames(as.list(flag_files[apply(layout_dist, 1, which.min)]), flag_files)
-
-# 3. History of design: group flags by historical design families and match within family
+# Group flags by historical design families and match within family
 families <- list(
   nordic = c("dk", "se", "no", "fi", "is", "fo", "ax"),
   british = c("gb", "au", "nz", "fj", "tv", "vg", "ky", "bm", "fk", "gs", "io", "ms", "pn", "sh", "tc", "ai", "ck", "nu", "us", "lr", "my"),
@@ -81,7 +67,6 @@ family_descriptions <- list(
   crescent = "Both flags feature the crescent and star motif popularized across the Islamic world through centuries of Ottoman and regional vexillological tradition.",
   iberian_stars = "These flags share historical roots in Iberian heraldry or the 19th-century independence banners of Cuba, Puerto Rico, the Philippines, and Chile."
 )
-codes <- sub("\\.png$", "", flag_files)
 hist_dist <- dist_mat
 history_notes <- setNames(
   as.list(rep("These two flags share closely aligned vexillological proportions, color symbolism, and regional design traditions.", length(flag_files))),
@@ -95,30 +80,23 @@ for (fam_name in names(families)) {
     history_notes[[f]] <- family_descriptions[[fam_name]]
   }
 }
-hist_dist[dist_mat < 0.01] <- Inf
+hist_dist[same_flag_mask] <- Inf
 similar_history <- setNames(as.list(flag_files[apply(hist_dist, 1, which.min)]), flag_files)
 
 ojs_define(
   flag_files = flag_files,
   country_names = country_names,
-  similar_color = similar_color,
-  similar_layout = similar_layout,
   similar_history = similar_history,
   history_notes = history_notes
 )
 ```
 
 ```{ojs}
-// 1. User selects a flag and how to match it
+// 1. User selects a flag
 viewof selected_flag = Inputs.select(flag_files, {
   label: "Select a flag:",
   value: "us.png"
 })
-
-viewof match_type = Inputs.radio(
-  ["Color", "Layout", "History of Design"],
-  { label: "Match by:", value: "Color" }
-)
 
 selected_country = country_names[selected_flag.replace(".png", "")]
 
@@ -132,20 +110,14 @@ html`
 ```
 
 ```{ojs}
-// 2. Automatically look up and display the most similar flag for the chosen criterion
-lookup = match_type === "Color"
-  ? similar_color
-  : match_type === "Layout"
-  ? similar_layout
-  : similar_history
-
-similar_flag = lookup[selected_flag]
+// 2. Automatically look up and display the most similar flag based on history of design
+similar_flag = similar_history[selected_flag]
 similar_country = country_names[similar_flag.replace(".png", "")]
-history_text = match_type === "History of Design" ? history_notes[selected_flag] : ""
+history_text = history_notes[selected_flag]
 
 html`
   <div>
-    <h3>Most Similar Flag (${match_type})</h3>
+    <h3>Most Similar Flag (History of Design)</h3>
     <img src="w2560/${similar_flag}" style="max-width: 400px; border: 1px solid #ccc;">
     <p style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;">${similar_country} (${similar_flag})</p>
     <p style="max-width: 500px; color: #444;">${history_text}</p>
